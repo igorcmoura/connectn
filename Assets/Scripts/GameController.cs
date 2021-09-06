@@ -12,9 +12,9 @@ namespace ConnectN
         [SerializeField] private int _boardHeight = 6;
         [SerializeField] private Disk _diskPrefab;
         [SerializeField] private PlayerInputs _placementInputs;
+        [SerializeField] private Board _board;
 
         private Player[] _players;
-        private IBoard _board;
         private Match _match;
         private DiskPlacementController _placementController;
 
@@ -25,7 +25,6 @@ namespace ConnectN
                 new Player(_diskPrefab, Color.red),
                 new Player(_diskPrefab, Color.yellow)
             };
-            _board = new Board(_boardColumns, _boardHeight);
             _match = new Match(_numberToConnect, _players, _board);
             _placementController = new DiskPlacementController(_board);
             _placementInputs.PlacementController = _placementController;

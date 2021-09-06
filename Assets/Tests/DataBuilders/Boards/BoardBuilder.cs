@@ -1,5 +1,7 @@
 using ConnectN.Boards;
 using ConnectN.Disks;
+using UnityEditor;
+using UnityEngine;
 
 namespace Tests.DataBuilders.Boards
 {
@@ -34,7 +36,13 @@ namespace Tests.DataBuilders.Boards
 
         public override Board Build()
         {
-            var board = new Board(_width, _height);
+            var board = new GameObject().AddComponent<Board>();
+
+            var so = new SerializedObject(board);
+            so.FindProperty("_width").intValue = _width;
+            so.FindProperty("_height").intValue = _height;
+            so.ApplyModifiedProperties();
+
             foreach (var (columnIndex, disk) in _playedPositions ?? new (int, IDisk)[0]) {
                 board.Insert(columnIndex, disk);
             }

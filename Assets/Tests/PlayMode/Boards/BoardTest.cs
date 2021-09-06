@@ -11,30 +11,6 @@ namespace Tests.Boards
 {
     public class BoardTest
     {
-        public class Constructor
-        {
-            [TestCase(0, 5)]
-            [TestCase(-2, 5)]
-            [TestCase(5, 0)]
-            [TestCase(5, -2)]
-            [TestCase(0, 0)]
-            public void Creating_A_Board_With_Any_Size_Below_1_Throws_An_Exception(int width, int height)
-            {
-                BoardBuilder builder = A.Board.WithDimensions(width, height);
-                Assert.Throws<ArgumentOutOfRangeException>(() => { builder.Build(); });
-            }
-
-            [Test]
-            public void The_Board_Is_Created_Empty()
-            {
-                Board board = A.Board;
-
-                var placements = board.Placements;
-
-                Assert.IsEmpty(placements);
-            }
-        }
-
         public class Insert
         {
             [Test]
@@ -55,7 +31,7 @@ namespace Tests.Boards
             {
                 Board board = A.Board;
                 IDisk disk = An.IDisk.Build();
-                
+
                 var action = Substitute.For<Action<IDisk>>();
                 board.OnInsert += action;
                 board.Insert(0, disk);

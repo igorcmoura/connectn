@@ -1,25 +1,22 @@
 using ConnectN.Disks;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace ConnectN.Boards
 {
-    public class Board : IBoard
+    public class Board : MonoBehaviour, IBoard
     {
+        [SerializeField] private int _width = 7;
+        [SerializeField] private int _height = 6;
+        [SerializeField] private GameObject _boardPiecePrefab;
+        [SerializeField] private GameObject _boardBasePiecePrefab;
 
         private SortedDictionary<int, List<IDisk>> _columns = new SortedDictionary<int, List<IDisk>>();
+        private BoardRenderer _renderer;
 
-        public int Width { get; private set; }
-        public int Height { get; private set; }
-
-        public Board(int width, int height)
-        {
-            if (width <= 0) throw new ArgumentOutOfRangeException("width", width, "Value cannot be 0 or less.");
-            if (height <= 0) throw new ArgumentOutOfRangeException("height", height, "Value cannot be 0 or less.");
-
-            Width = width;
-            Height = height;
-        }
+        public int Width { get => _width; }
+        public int Height { get => _height; }
 
         public Dictionary<(int, int), IDisk> Placements {
             get {
@@ -50,6 +47,23 @@ namespace ConnectN.Boards
         }
 
         public Action<IDisk> OnInsert { get; set; }
+
+        private void OnValidate()
+        {
+            _width = Math.Max(1, _width);
+            _height = Math.Max(1, _height);
+        }
+
+        private void Start()
+        {
+            _renderer = new BoardRenderer(this, _boardPiecePrefab, _boardBasePiecePrefab);
+            _renderer.Render();
+        }
+
+        private void OnDestroy()
+        {
+            _renderer.Destroy();
+        }
 
         public void Insert(int columnIndex, IDisk disk)
         {
