@@ -1,13 +1,16 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace ConnectN.Disks
 {
-    [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(Rigidbody), typeof(AudioSource))]
     public class Disk : MonoBehaviour, IDisk
     {
         private Rigidbody _rb;
+        private AudioSource _audioSource;
+        private bool collided = false;
 
         public Player Owner { get; private set; }
 
@@ -15,6 +18,7 @@ namespace ConnectN.Disks
 
         private void Start()
         {
+            _audioSource = GetComponent<AudioSource>();
             _rb = GetComponent<Rigidbody>();
             _rb.isKinematic = true;
             if (Owner != null)
@@ -26,6 +30,15 @@ namespace ConnectN.Disks
             var newDisk = Instantiate(this);
             newDisk.Owner = owner;
             return newDisk;
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (!collided) {
+                _audioSource.pitch = Random.Range(1f, 1.2f);
+                _audioSource.Play();
+                collided = true;
+            }
         }
 
         public void SetCurrentPosition(Vector3 position)
