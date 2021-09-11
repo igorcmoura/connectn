@@ -2,7 +2,6 @@ using ConnectN.Boards;
 using ConnectN.Disks;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace ConnectN
 {

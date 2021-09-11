@@ -5,9 +5,10 @@ namespace ConnectN.Boards
 {
     public class BoardRenderer
     {
-        private Board _board;
         private GameObject _boardPiecePrefab;
         private GameObject _boardBasePiecePrefab;
+
+        private Board _board;
 
         private List<GameObject> _boardPieces;
 

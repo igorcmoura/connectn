@@ -9,8 +9,6 @@ namespace ConnectN.Boards
     {
         [SerializeField] private int _width = 7;
         [SerializeField] private int _height = 6;
-        [SerializeField] private GameObject _boardPiecePrefab;
-        [SerializeField] private GameObject _boardBasePiecePrefab;
 
         private SortedDictionary<int, List<IDisk>> _columns = new SortedDictionary<int, List<IDisk>>();
         private BoardRenderer _renderer;
@@ -48,6 +46,11 @@ namespace ConnectN.Boards
 
         public Action<IDisk> OnInsert { get; set; }
 
+        public void Construct(BoardRenderer renderer)
+        {
+            _renderer = renderer;
+        }
+
         private void OnValidate()
         {
             _width = Math.Max(1, _width);
@@ -56,7 +59,6 @@ namespace ConnectN.Boards
 
         private void Start()
         {
-            _renderer = new BoardRenderer(this, _boardPiecePrefab, _boardBasePiecePrefab);
             _renderer.Render();
         }
 

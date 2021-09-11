@@ -38,10 +38,10 @@ namespace Tests.DataBuilders.Boards
         {
             var board = new GameObject().AddComponent<Board>();
 
-            var so = new SerializedObject(board);
-            so.FindProperty("_width").intValue = _width;
-            so.FindProperty("_height").intValue = _height;
-            so.ApplyModifiedProperties();
+            //var so = new SerializedObject(board);
+            //so.FindProperty("_width").intValue = _width;
+            //so.FindProperty("_height").intValue = _height;
+            //so.ApplyModifiedProperties();
 
             foreach (var (columnIndex, disk) in _playedPositions ?? new (int, IDisk)[0]) {
                 board.Insert(columnIndex, disk);

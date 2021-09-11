@@ -23,7 +23,8 @@ namespace ConnectN
 
             _players = new Player[] {
                 new Player(_diskPrefab, Color.red),
-                new Player(_diskPrefab, Color.yellow)
+                new Player(_diskPrefab, Color.yellow),
+                new Player(_diskPrefab, Color.green)
             };
             _match = new Match(_numberToConnect, _players, _board);
             _placementController = new DiskPlacementController(_board);
@@ -40,7 +41,9 @@ namespace ConnectN
             // go to placing disk state
             //
             //var disk = match.CurrentPlayer.GetDisk();
-
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                Application.Quit();
+            }
         }
 
         private void StartPlacement()

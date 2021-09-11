@@ -8,6 +8,8 @@ namespace ConnectN.Disks
     [RequireComponent(typeof(Rigidbody), typeof(AudioSource))]
     public class Disk : MonoBehaviour, IDisk
     {
+        private float _height;
+        private bool _dropped = false;
         private Rigidbody _rb;
         private AudioSource _audioSource;
         private bool collided = false;
@@ -24,6 +26,26 @@ namespace ConnectN.Disks
             if (Owner != null)
                 GetComponent<Renderer>().material.color = Owner.Color;
         }
+
+        //private void FixedUpdate()
+        //{
+        //    if (_dropped && _rb.position.y < _height) {
+        //        _rb.velocity = new Vector3(_rb.velocity.x, 10, _rb.velocity.z);
+        //        //var y = Mathf.Max(_rb.position.y, _height);
+        //        //_rb.position = new Vector3(_rb.position.x, y, _rb.position.z);
+        //        //_rb.AddForce(Vector3.up * 100);
+        //        //transform.position = new Vector3(transform.position.x, _height, transform.position.z);
+        //    }
+        //}
+
+        //private void OnCollisionEnter(Collision collision)
+        //{
+        //    if (!_dropped) {
+        //        _height = Mathf.Round(transform.position.y);
+        //        _dropped = true;
+        //        OnFinishDropping?.Invoke();
+        //    }
+        //}
 
         public IDisk Instantiate(Player owner)
         {
@@ -61,6 +83,16 @@ namespace ConnectN.Disks
         {
             yield return new WaitForSeconds(1);
             OnFinishDropping?.Invoke();
+            _dropped = true;
+            _height = Mathf.Round(transform.position.y);
+            //StartCoroutine(WaitForStability());
+        }
+
+        private IEnumerator WaitForStability()
+        {
+            yield return new WaitForSeconds(5);
+            _rb.isKinematic = true;
+            _rb.MovePosition(new Vector3(_rb.position.x, _height, _rb.position.y));
         }
     }
 }
