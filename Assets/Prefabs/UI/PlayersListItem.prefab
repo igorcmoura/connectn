@@ -1778,6 +1778,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _colorImage: {fileID: 8510055768534193315}
   _colorButton: {fileID: 5033194685487119758}
+  _deleteButton: {fileID: 4446103125819149089}
   _colorPicker: {fileID: 0}
 --- !u!1 &6232276954969894265
 GameObject:
