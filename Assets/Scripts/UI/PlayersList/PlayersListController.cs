@@ -1,6 +1,5 @@
-using HSVPicker;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace ConnectN.UI.PlayersList
 {

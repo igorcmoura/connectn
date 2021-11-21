@@ -2,6 +2,7 @@ using ConnectN.Boards;
 using ConnectN.Disks;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace ConnectN
 {
@@ -38,6 +39,9 @@ namespace ConnectN
             if (LineChecker.CheckForAWinner(_board.Placements, _numberToConnect, out Player winner)) {
                 IsFinished = true;
                 Winner = winner;
+            }
+            foreach (var pos in _board.AvailablePositions) {
+                Debug.Log(pos);
             }
             if (_board.AvailablePositions.Length == 0) {
                 IsFinished = true;

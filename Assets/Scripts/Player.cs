@@ -18,5 +18,10 @@ namespace ConnectN
         {
             return _diskPrefab.Instantiate(this);
         }
+
+        public void ChoosePlacement()
+        {
+
+        }
     }
 }

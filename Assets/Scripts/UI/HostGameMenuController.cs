@@ -1,7 +1,8 @@
-using System;
+using ConnectN.UI.PlayersList;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 namespace ConnectN.UI
 {
@@ -12,6 +13,8 @@ namespace ConnectN.UI
         [SerializeField] private TMP_InputField _boardHeightInput;
         [SerializeField] private TMP_InputField _numberOfConnections;
 
+        [SerializeField] private PlayersListController _playersListController;
+
         private void Start()
         {
             _boardWidthInput.contentType = TMP_InputField.ContentType.IntegerNumber;
@@ -21,13 +24,13 @@ namespace ConnectN.UI
 
         public void StartGame()
         {
-            ValidateValues();
+            SaveValues();
             LoadGameScene();
         }
 
         private void LoadGameScene() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
-        private void ValidateValues()
+        private void SaveValues()
         {
             int boardWidth = ParseNumberInput(_boardWidthInput, "Width");
             int boardHeight = ParseNumberInput(_boardHeightInput, "Height");

@@ -6,6 +6,7 @@ namespace Tests.DataBuilders
     public static class A
     {
         public static BoardBuilder Board => new BoardBuilder();
+        public static BoardColumnBuilder BoardColumn => new BoardColumnBuilder();
         public static DiskBuilder Disk => new DiskBuilder();
         public static MatchBuilder Match => new MatchBuilder();
         public static DiskPlacementControllerBuilder DiskPlacementController => new DiskPlacementControllerBuilder();

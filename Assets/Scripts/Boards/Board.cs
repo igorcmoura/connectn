@@ -11,6 +11,7 @@ namespace ConnectN.Boards
         [SerializeField] private int _height = 6;
 
         private SortedDictionary<int, List<IDisk>> _columns = new SortedDictionary<int, List<IDisk>>();
+        // private BoardColumn[] _columns;
         private BoardRenderer _renderer;
 
         public int Width { get => _width; }
@@ -32,6 +33,16 @@ namespace ConnectN.Boards
             }
         }
 
+        // public BoardColumn[] AvailableColumns {
+        //     get {
+        //         var availableColumns = new List<BoardColumn>();
+        //         foreach (var column in _columns) {
+
+        //         }
+        //         return availableColumns.ToArray();
+        //     }
+        // }
+
         public int[] AvailablePositions {
             get {
                 var availablePositions = new List<int>();
@@ -46,8 +57,10 @@ namespace ConnectN.Boards
 
         public Action<IDisk> OnInsert { get; set; }
 
-        public void Construct(BoardRenderer renderer)
+        public void Construct(int width, int height, BoardRenderer renderer)
         {
+            _width = width;
+            _height = height;
             _renderer = renderer;
         }
 
@@ -59,6 +72,10 @@ namespace ConnectN.Boards
 
         private void Start()
         {
+            // _columns = new BoardColumn[_width];
+            // for (int i = 0; i < _width; i++) {
+            //     _columns[i] = new BoardColumn();
+            // }
             _renderer.Render();
         }
 
