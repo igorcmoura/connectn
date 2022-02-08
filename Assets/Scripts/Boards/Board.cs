@@ -2,6 +2,7 @@ using ConnectN.Disks;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace ConnectN.Boards
 {
@@ -11,6 +12,8 @@ namespace ConnectN.Boards
         [SerializeField] private int _height = 6;
         [SerializeField] private GameObject _boardPiecePrefab;
         [SerializeField] private GameObject _boardBasePiecePrefab;
+
+        public UnityAction OnSizeChange;
 
         private SortedDictionary<int, List<IDisk>> _columns = new SortedDictionary<int, List<IDisk>>();
         private BoardRenderer _renderer;
@@ -58,6 +61,7 @@ namespace ConnectN.Boards
             _width = width;
             _height = height;
             _renderer = renderer;
+            UpdateBoard();
         }
 
         private void OnValidate()
@@ -68,12 +72,18 @@ namespace ConnectN.Boards
 
         private void Start()
         {
-            _renderer.Render();
+            UpdateBoard();
         }
 
         private void OnDestroy()
         {
             _renderer.Destroy();
+        }
+
+        private void UpdateBoard()
+        {
+            _renderer.Render();
+            OnSizeChange?.Invoke();
         }
 
         public void Insert(int columnIndex, IDisk disk)
