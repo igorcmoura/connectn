@@ -1,22 +1,16 @@
-using ConnectN.Disks;
 using UnityEngine;
 
 namespace ConnectN
 {
     public class Player
     {
+        public string Name { get; private set; }
         public Color Color { get; private set; }
-        private IDisk _diskPrefab;
 
-        public Player(IDisk diskPrefab, Color color)
+        public Player(string name, Color color)
         {
+            Name = name;
             Color = color;
-            _diskPrefab = diskPrefab;
-        }
-
-        public IDisk GetDisk()
-        {
-            return _diskPrefab.Instantiate(this);
         }
     }
 }

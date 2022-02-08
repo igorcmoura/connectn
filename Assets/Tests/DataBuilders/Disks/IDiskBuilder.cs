@@ -17,7 +17,7 @@ namespace Tests.DataBuilders.Disks
         public IDisk Build()
         {
             var disk = Substitute.For<IDisk>();
-            disk.Owner.Returns(_owner ?? A.Player.WithDiskPrefab(disk));
+            disk.Owner.Returns(_owner ?? A.Player);
             disk.Instantiate(Arg.Any<Player>()).Returns(arg => An.IDisk.ForPlayer((Player) arg[0]).Build());
             return disk;
         }

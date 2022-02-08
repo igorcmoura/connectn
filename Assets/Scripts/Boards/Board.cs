@@ -48,6 +48,18 @@ namespace ConnectN.Boards
 
         public Action<IDisk> OnInsert { get; set; }
 
+        public void Construct(int width, int height)
+        {
+            Construct(width, height, new BoardRenderer(this, _boardPiecePrefab, _boardBasePiecePrefab));
+        }
+
+        public void Construct(int width, int height, BoardRenderer renderer)
+        {
+            _width = width;
+            _height = height;
+            _renderer = renderer;
+        }
+
         private void OnValidate()
         {
             _width = Math.Max(1, _width);
@@ -56,7 +68,6 @@ namespace ConnectN.Boards
 
         private void Start()
         {
-            _renderer = new BoardRenderer(this, _boardPiecePrefab, _boardBasePiecePrefab);
             _renderer.Render();
         }
 

@@ -38,7 +38,7 @@ namespace Tests
                     .WithPlayers(player1, player2)
                     .WithBoard(board);
 
-                board.Insert(0, player1.GetDisk());
+                board.Insert(0, A.Disk.ForPlayer(player1).Build());
 
                 Assert.That(match.CurrentPlayer, Is.EqualTo(player2));
             }
@@ -55,11 +55,11 @@ namespace Tests
                     .WithBoard(board);
 
                 Assert.That(match.CurrentPlayer, Is.EqualTo(player1));
-                board.Insert(0, player1.GetDisk());
+                board.Insert(0, A.Disk.ForPlayer(player1).Build());
                 Assert.That(match.CurrentPlayer, Is.EqualTo(player2));
-                board.Insert(0, player2.GetDisk());
+                board.Insert(0, A.Disk.ForPlayer(player2).Build());
                 Assert.That(match.CurrentPlayer, Is.EqualTo(player3));
-                board.Insert(0, player3.GetDisk());
+                board.Insert(0, A.Disk.ForPlayer(player3).Build());
                 Assert.That(match.CurrentPlayer, Is.EqualTo(player1));
             }
         }
@@ -72,7 +72,7 @@ namespace Tests
                 Board board = A.Board;
                 Match match = A.Match.WithBoard(board);
 
-                board.Insert(0, match.CurrentPlayer.GetDisk());
+                board.Insert(0, A.Disk.ForPlayer(match.CurrentPlayer).Build());
 
                 Assert.That(match.IsFinished, Is.False);
             }
@@ -82,15 +82,15 @@ namespace Tests
             {
                 Player player = A.Player;
                 Board board = A.Board.WithPlayedPositions(
-                    (1, player.GetDisk()),
-                    (2, player.GetDisk())
+                    (1, A.Disk.ForPlayer(player).Build()),
+                    (2, A.Disk.ForPlayer(player).Build())
                 );
                 Match match = A.Match
                     .WithNumberToConnect(3)
                     .WithPlayers(player, A.Player)
                     .WithBoard(board);
 
-                board.Insert(3, player.GetDisk());
+                board.Insert(3, A.Disk.ForPlayer(player).Build());
 
                 Assert.That(match.IsFinished, Is.True);
                 Assert.That(match.Winner, Is.EqualTo(player));
@@ -105,7 +105,7 @@ namespace Tests
                     .WithNumberToConnect(2)
                     .WithBoard(board);
 
-                board.Insert(0, match.CurrentPlayer.GetDisk());
+                board.Insert(0, A.Disk.ForPlayer(match.CurrentPlayer).Build());
 
                 Assert.That(match.IsFinished, Is.True);
                 Assert.That(match.Winner, Is.Null);
@@ -116,16 +116,16 @@ namespace Tests
             {
                 Player player = A.Player;
                 Board board = A.Board.WithPlayedPositions(
-                    (1, player.GetDisk()),
-                    (2, player.GetDisk())
+                    (1, A.Disk.ForPlayer(player).Build()),
+                    (2, A.Disk.ForPlayer(player).Build())
                 );
                 Match match = A.Match
                     .WithNumberToConnect(3)
                     .WithPlayers(player, A.Player)
                     .WithBoard(board);
 
-                board.Insert(3, match.CurrentPlayer.GetDisk());
-                TestDelegate tryPlay = () => { board.Insert(3, match.CurrentPlayer.GetDisk()); };
+                board.Insert(3, A.Disk.ForPlayer(match.CurrentPlayer).Build());
+                TestDelegate tryPlay = () => { board.Insert(3, A.Disk.ForPlayer(match.CurrentPlayer).Build()); };
 
                 Assert.That(tryPlay, Throws.InvalidOperationException);
             }
@@ -139,7 +139,7 @@ namespace Tests
                     .WithPlayers(A.Player, player2)
                     .WithBoard(board);
 
-                TestDelegate tryPlay = () => { board.Insert(0, player2.GetDisk()); };
+                TestDelegate tryPlay = () => { board.Insert(0, A.Disk.ForPlayer(player2).Build()); };
 
                 Assert.That(tryPlay, Throws.InvalidOperationException);
             }

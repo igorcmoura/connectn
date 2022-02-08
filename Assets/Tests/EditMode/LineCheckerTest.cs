@@ -14,8 +14,8 @@ namespace Tests
             Player player1 = A.Player;
             Player player2 = A.Player;
             var placements = new Dictionary<(int, int), IDisk> { 
-                { (3, 0), player1.GetDisk() },
-                { (4, 0), player2.GetDisk() }
+                { (3, 0), A.Disk.ForPlayer(player1).Build() },
+                { (4, 0), A.Disk.ForPlayer(player2).Build() }
             };
 
             var hasWinner = LineChecker.CheckForAWinner(placements, 4, out Player winner);
@@ -29,9 +29,9 @@ namespace Tests
         {
             Player player = A.Player;
             var placements = new Dictionary<(int, int), IDisk> {
-                { (1, 0), player.GetDisk() },
-                { (2, 0), player.GetDisk() },
-                { (3, 0), player.GetDisk() }
+                { (1, 0), A.Disk.ForPlayer(player).Build() },
+                { (2, 0), A.Disk.ForPlayer(player).Build() },
+                { (3, 0), A.Disk.ForPlayer(player).Build() }
             };
 
             var hasWinner = LineChecker.CheckForAWinner(placements, 3, out Player winner);
@@ -45,9 +45,9 @@ namespace Tests
         {
             Player player = A.Player;
             var placements = new Dictionary<(int, int), IDisk> {
-                { (1, 0), player.GetDisk() },
-                { (1, 1), player.GetDisk() },
-                { (1, 2), player.GetDisk() }
+                { (1, 0), A.Disk.ForPlayer(player).Build() },
+                { (1, 1), A.Disk.ForPlayer(player).Build() },
+                { (1, 2), A.Disk.ForPlayer(player).Build() }
             };
 
             var hasWinner = LineChecker.CheckForAWinner(placements, 3, out Player winner);
@@ -61,9 +61,9 @@ namespace Tests
         {
             Player player = A.Player;
             var placements = new Dictionary<(int, int), IDisk> {
-                { (1, 0), player.GetDisk() },
-                { (2, 1), player.GetDisk() },
-                { (3, 2), player.GetDisk() }
+                { (1, 0), A.Disk.ForPlayer(player).Build() },
+                { (2, 1), A.Disk.ForPlayer(player).Build() },
+                { (3, 2), A.Disk.ForPlayer(player).Build() }
             };
 
             var hasWinner = LineChecker.CheckForAWinner(placements, 3, out Player winner);
@@ -77,9 +77,9 @@ namespace Tests
         {
             Player player = A.Player;
             var placements = new Dictionary<(int, int), IDisk> {
-                { (3, 0), player.GetDisk() },
-                { (2, 1), player.GetDisk() },
-                { (1, 2), player.GetDisk() }
+                { (3, 0), A.Disk.ForPlayer(player).Build() },
+                { (2, 1), A.Disk.ForPlayer(player).Build() },
+                { (1, 2), A.Disk.ForPlayer(player).Build() }
             };
 
             var hasWinner = LineChecker.CheckForAWinner(placements, 3, out Player winner);
@@ -94,9 +94,9 @@ namespace Tests
             Player player1 = A.Player;
             Player player2 = A.Player;
             var placements = new Dictionary<(int, int), IDisk> {
-                { (1, 0), player1.GetDisk() },
-                { (2, 0), player2.GetDisk() },
-                { (3, 0), player1.GetDisk() }
+                { (1, 0), A.Disk.ForPlayer(player1).Build() },
+                { (2, 0), A.Disk.ForPlayer(player2).Build() },
+                { (3, 0), A.Disk.ForPlayer(player1).Build() }
             };
 
             var hasWinner = LineChecker.CheckForAWinner(placements, 3, out Player winner);
