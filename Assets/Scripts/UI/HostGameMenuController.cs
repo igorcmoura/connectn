@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
+using Unity.Netcode;
 
 namespace ConnectN.UI
 {
@@ -22,6 +23,16 @@ namespace ConnectN.UI
             _boardWidthInput.contentType = TMP_InputField.ContentType.IntegerNumber;
             _boardHeightInput.contentType = TMP_InputField.ContentType.IntegerNumber;
             _numberOfConnections.contentType = TMP_InputField.ContentType.IntegerNumber;
+        }
+
+        public void StartHost()
+        {
+            NetworkManager.Singleton.StartHost();
+        }
+
+        public void StartClient()
+        {
+            NetworkManager.Singleton.StartClient();
         }
 
         public void StartGame()
